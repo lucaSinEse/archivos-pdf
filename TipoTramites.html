@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABM Tipo Tramite</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <script src="./js/tipoTramites.js" defer></script>
+</head>
+<body>
+  <script src="./js/components/header.js"></script>
+
+  <main>
+    <div 
+    class="agregarTramites">
+      <button 
+      class="crear" 
+      onclick="abrirDialog('formularioCrear')">Agregar Tramites</button>
+    </div>
+    <dialog 
+    id="formularioCrear">
+    <h2>Crear Tipo de Tramite</h2>
+      <form 
+      action="#">
+        <input 
+        type="text" 
+        name="Descripcion"
+        id="descripcionTramiteCreado"
+        placeholder="Descripción">
+        <label for="Estado">
+          Estado
+          <input type="checkbox"
+          name="Estado"
+          id="estadoTramiteCreado">
+        </label>
+      </form>
+      <div class="botones">
+        <button 
+        class="crear">Crear Tipo de Tramite</button>
+        <button 
+        class="eliminar"
+        onclick="cerrarDialog('formularioCrear')">Cerrar</button>
+      </div>
+    </dialog>
+    <div 
+    class="tablaTipoTramite">
+      <table>
+        <tr class="tipos">
+          <th>id_TipoTramite</th>
+          <th>descripción</th>
+          <th>Estado</th>
+          <th>Editar</th>
+          <th>Eliminar</th>
+        </tr>
+        <tbody id="obtenerTipoTramites">
+          <tr>
+            <td>1</td>
+            <td>descripcion</td>
+            <td>false qcy</td>
+            <td>
+              <button 
+              class="editar"
+              onclick="abrirDialogEditar('formularioEditar', 1)">Editar</button>
+            </td>
+            <td>
+              <button 
+              class="eliminar"
+              onclick="abrirDialog('dialogEliminar')">Eliminar</button>
+            </td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    <dialog 
+    id="formularioEditar">
+    <h2>Editar Tipo de Tramite</h2>
+      <form 
+      action="#">
+        <input 
+        type="text" 
+        name="Descripcion"
+        id="descripcionTramiteEditado"
+        placeholder="Descripcion">
+        <label for="Estado">
+          Estado
+          <input type="checkbox"
+          name="Estado"
+          id="estadoTramiteEditado">
+        </label>
+      </form>
+      <div class="botones">
+        <button 
+        class="crear">Editar Tipo de Tramite</button>
+        <button 
+        class="eliminar"
+        onclick="cerrarDialog('formularioEditar')">Cerrar</button>
+      </div>
+    </dialog>
+
+    <dialog id="dialogEliminar">
+      <h2>¿Seguro que queres eliminar este tramite?</h2>
+      <p id="idEliminar"></p>
+      <div class="opciones">
+        <button
+        class="eliminar">Si, eliminar tramite</button>
+        <button class="crear"
+        onclick="cerrarDialog('dialogEliminar')">
+          No, cerrar
+        </button>
+      </div>
+    </dialog>
+  </main>
+  <script src="./js/components/footer.js"></script>
+</body>
+</html>

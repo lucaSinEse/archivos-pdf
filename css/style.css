@@ -1,0 +1,190 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  font-size: 18px;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  background-color: grey;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+header {
+  background-color: #171717;
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+nav {
+  /* background-color: #4CAF50; */
+  width: 40%;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
+  list-style:none;
+}
+
+nav a {
+  text-decoration: none;
+  font-size: 20px;
+  color: #fff;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.agregarTramites {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+button {
+  color: #fff;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+}
+
+.editar {
+  background-color: #FF9800;
+}
+
+.eliminar {
+  background-color: #ca1010;
+}
+
+.crear {
+  background-color: #4CAF50;
+}
+
+dialog {
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  width: 25%;
+  height: 40vh;
+}
+
+dialog h2 {
+  width: 100%;
+  height: 10%;
+  text-align: center;
+  font-size: 24px;
+}
+
+dialog form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  /* background-color: red; */
+  width: 100%;
+  height: 50%;
+  padding-left: 5px;
+}
+
+dialog form input {
+  /* background-color: purple; */
+  width: 70%;
+  height: 30%;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+dialog form label {
+  /* background-color: pink; */
+  width: 70%;
+  height: 30%;
+  padding: 5px;
+  font-size: 20px;
+  display: flex;
+  gap: 15px;
+}
+
+dialog .botones {
+  /* background-color: red; */
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+dialog .opciones {
+  /* background-color: yellow; */
+  width: 100%;
+  height: 70%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#estadoTramiteCreado {
+  width: 20px;
+  height: 20px;
+  accent-color: #4CAF50;
+}
+
+.tablaTipoTramite {
+  table-layout: auto;
+  border-collapse: collapse;
+  background-color: #f9f9f9;
+  height: 70vh;
+  width: 70%;
+  overflow-y: scroll; 
+  border-radius: 8px; 
+}
+
+table {
+  width: 100%;
+}
+
+.tipos {
+  background-color: #f9f9f9;    
+  position: sticky;
+  top: 0;
+  z-index: 10 ;
+}
+th,
+td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid black;
+  text-transform: capitalize;
+  color: #333;
+}
+
+footer {
+  width: 100%;
+  height: 5%; 
+  display: flex;
+  justify-content: center;
+}
+
+
