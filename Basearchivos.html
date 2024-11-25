@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Base</title>
+  <!-- importamos estilos, ej:  -->
+   <link rel="stylesheet" href="./css/style.css">
+  
+  <!-- tambien se puede importar el js directamente desde aca -->
+  <!-- <script src="./js/tipoTramites.js" defer></script> -->
+</head>
+<body>
+  <!-- llamamos al header -->
+   <script src="./js/components/header.js"></script>
+   <main>
+    <!-- aca va el contenido principal -->
+        <div>
+        
+        <h2>Subir archivo PDF</h2>
+        <input type="text" id="folderName" placeholder="Nombre de la carpeta">
+        <input type="file" id="pdfFile" accept="application/pdf">
+        <button id="uploadBtn">Subir PDF</button>
+        <div id="message" style="margin-top: 15px; color: green;"></div>
+        </div>
+   </main>
+   <!-- llamamos al footer -->
+    <script src="./js/components/footer.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./js/CargarPdf.js"></script>
+</body>
+</html>
