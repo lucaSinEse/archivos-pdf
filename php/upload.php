@@ -1,22 +1,39 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['folder']) && isset($_FILES['pdf']) && $_FILES['pdf']['error'] === UPLOAD_ERR_OK) {
-        $folderName = preg_replace('/[^a-zA-Z0-9_-]/', '_', $_POST['folder']); // Sanear el nombre de la carpeta
+    if (isset($_POST['folder']) && isset($_FILES['pdf']) && !empty($_FILES['pdf']['name'][0])) {
+        $folderName = preg_replace('/[^a-zA-Z0-9_-]/', '_', $_POST['folder']);
         $uploadDir = 'uploads/' . $folderName . '/';
-        $fileName = basename($_FILES['pdf']['name']);
-        $targetFilePath = $uploadDir . $fileName;
 
         // Crear la carpeta si no existe
         if (!is_dir($uploadDir)) {
             mkdir($uploadDir, 0777, true);
         }
 
-        // Mover el archivo cargado a la carpeta de destino
-        if (move_uploaded_file($_FILES['pdf']['tmp_name'], $targetFilePath)) {
-            echo 'Archivo subido correctamente en la carpeta: ' . htmlspecialchars($folderName);
-        } else {
+        $uploadMessages = [];
+        $errors = [];
+
+        foreach ($_FILES['pdf']['name'] as $key => $name) {
+            if ($_FILES['pdf']['error'][$key] === UPLOAD_ERR_OK) {
+                $fileName = basename($name);
+                $targetFilePath = $uploadDir . $fileName;
+
+                // Mover el archivo cargado a la carpeta de destino
+                if (move_uploaded_file($_FILES['pdf']['tmp_name'][$key], $targetFilePath)) {
+                    $uploadMessages[] = 'Archivo subido correctamente: ' . htmlspecialchars($fileName);
+                } else {
+                    $errors[] = 'Error al guardar el archivo: ' . htmlspecialchars($fileName);
+                }
+            } else {
+                $errors[] = 'Error en el archivo: ' . htmlspecialchars($name);
+            }
+        }
+
+        if (!empty($uploadMessages)) {
+            echo implode('<br>', $uploadMessages);
+        }
+        if (!empty($errors)) {
             http_response_code(500);
-            echo 'Error al guardar el archivo.';
+            echo implode('<br>', $errors);
         }
     } else {
         http_response_code(400);
