@@ -1,3 +1,10 @@
+//elementos de agregar tipo tramite
+const txtdescripcionTramiteCreado = document.getElementById("txtdescripcionTramiteCreado");
+const cbxestadoTramiteCreado = document.getElementById("cbxestadoTramiteCreado");
+const lblnotificacionagregado = document.getElementById("lblnotificacionagregado");
+
+
+
 function abrirDialog(id) {
   const dialog = document.getElementById(id);
   dialog.showModal();
@@ -13,12 +20,37 @@ function abrirDialogEditar(idDialog, id_TipoTramite) {
   console.log(id_TipoTramite);
 }
 
-// document.getElementById('hamburger-button').addEventListener('click', function() {
-//   const navHamburguesa = document.getElementById('nav-hamburguesa');
-//   navHamburguesa.classList.toggle('active');
-// });
 
 function abrirNav() {
   const navHamburguesa = document.getElementById("nav-hamburguesa");
   navHamburguesa.classList.toggle('active');
+}
+
+function AgregarTipoTramite() {
+ 
+  $.ajax({
+    type: "POST",
+    url: "./php/phpinserts.php",
+    // data: datos,
+    data: {
+        action: 'GuardarTipoTramite',
+        Descripcion: txtdescripcionTramiteCreado.value,
+        estado: cbxestadoTramiteCreado.checked
+
+    },
+    success: function(data) {
+      console.log(data);
+    
+        if(data ==="esta"){
+          lblnotificacionagregado.innerText = "esta";
+        }else{
+          if(data === "guardado"){
+            lblnotificacionagregado.innerText ="Se guardo correctamente";
+          }else{
+            lblnotificacionagregado.innerText ="Error BD";
+          }
+        }
+    }
+});
+
 }
