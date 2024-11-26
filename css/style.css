@@ -230,7 +230,7 @@ footer {
     left: 0;
     right: 0;
     background-color: rgba(128, 128, 128, 0.8);
-    width: 25%;
+    width: 35%;
     height: 25%;
     z-index: 20;
     border-radius: 8px;
@@ -255,7 +255,7 @@ footer {
   }
 
   dialog {
-    width: 30%;
+    width: 90%;
   }
 
   dialog h2 {
@@ -275,5 +275,18 @@ footer {
     display: flex;
     justify-content: space-around;
     align-items: center;
+  }
+
+  .tablaTipoTramite {
+    width: 90%;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  footer span {
+    font-size: 16px;
+    text-align: center;
   }
 }
