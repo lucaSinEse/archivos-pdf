@@ -59,6 +59,7 @@
     <h2>Editar Tipo de Tramite</h2>
       <form 
       action="#">
+        <p id="lblIdTipotramite" style="display: none"></p>
         <input 
         type="text" 
         name="Descripcion"
@@ -70,10 +71,11 @@
           name="Estado"
           id="estadoTramiteEditado">
         </label>
+        <p id="lblnotificacioneditado"></p>
       </form>
       <div class="botones">
         <button 
-        class="crear">Editar Tipo de Tramite</button>
+        class="crear" onclick="editarTramite()">Editar Tipo de Tramite</button>
         <button 
         class="eliminar"
         onclick="cerrarDialog('formularioEditar')">Cerrar</button>
