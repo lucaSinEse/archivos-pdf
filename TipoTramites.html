@@ -6,7 +6,7 @@
   <title>ABM Tipo Tramite</title>
   <link rel="stylesheet" href="./css/style.css">
 </head>
-<body onload="ObtenerTipoTramites()">
+<body onload="">
   <script src="./js/components/header.js"></script>
   <main>
     <div 
@@ -45,29 +45,13 @@
     class="tablaTipoTramite">
       <table>
         <tr class="tipos">
-          <th>id_TipoTramite</th>
           <th>descripción</th>
           <th>Estado</th>
           <th>Editar</th>
           <th>Eliminar</th>
         </tr>
         <tbody id="obtenerTipoTramites">
-          <tr>
-            <td>1</td>
-            <td>descripcion</td>
-            <td>false qcy</td>
-            <td>
-              <button 
-              class="editar"
-              onclick="abrirDialogEditar('formularioEditar', 1)">Editar</button>
-            </td>
-            <td>
-              <button 
-              class="eliminar"
-              onclick="abrirDialog('dialogEliminar')">Eliminar</button>
-            </td>
-          </tr>
-          
+        
         </tbody>
       </table>
     </div>

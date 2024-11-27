@@ -9,6 +9,21 @@ const lblnotificacionagregado = document.getElementById(
   "lblnotificacionagregado"
 );
 
+
+//tabla de tipo tramites
+const obtenerTipoTramites = document.getElementById(
+  "obtenerTipoTramites"
+);
+
+
+
+$(document).ready(function() {
+  //trae todos los elemnetos para l
+  ObtenerTipoTramites();
+
+});
+
+
 function abrirDialog(id) {
   const dialog = document.getElementById(id);
   dialog.showModal();
@@ -39,10 +54,10 @@ function AgregarTipoTramite() {
       estado: cbxestadoTramiteCreado.checked,
     },
     success: function (data) {
-      if (data === "esta") {
+      if (data == "esta") {
         lblnotificacionagregado.innerText = "esta";
       } else {
-        if (data === "guardado") {
+        if (data == "guardado") {
           lblnotificacionagregado.innerText = "Se guardo correctamente";
         } else {
           lblnotificacionagregado.innerText = "Error BD";
@@ -60,7 +75,8 @@ function ObtenerTipoTramites() {
       action: "ObtenerTipoTramites",
     },
     success: function (data) {
-      console.log(data); 
+      console.log(data);
+      obtenerTipoTramites.innerHTML = data;
     },
     error: function (xhr, status, error) {
       console.error("Error en la solicitud AJAX:", error);

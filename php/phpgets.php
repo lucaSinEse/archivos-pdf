@@ -16,7 +16,7 @@
     }
   }
 
-  function ObtenerTipoTramites() {
+  /* function ObtenerTipoTramites() {
     ob_clean();
     $conexion = conectar();
     $sql = "SELECT * FROM `Archivos_TipoTramites`";
@@ -41,6 +41,40 @@
             "data" => $tramites,
         ]);
   }
+  desconectar($conexion); 
+  } */
+
+  function ObtenerTipoTramites() {
+    ob_clean();
+    $conexion = conectar();
+    $sql = "SELECT * FROM `Archivos_TipoTramites`";
+
+    $result = mysqli_query($conexion, $sql);
+    $cadena="";
+    while ($row = mysqli_fetch_array($result)) {
+      $estado ="";
+      if($row['Estado'] =='1'){
+        $estado ="Activo";
+      }else{
+        $estado ="Inactivo";
+      }
+      $cadena = $cadena. "<tr>
+            <td>".$row['Descripcion']."</td>
+            <td>". $estado."</td>
+            <td>
+              <button 
+              class='editar'
+              onclick='abrirDialogEditar('formularioEditar', ".$row['ID_TipoTramites'].")'>Editar</button>
+            </td>
+            <td>
+              <button 
+              class='eliminar'
+              onclick='abrirDialog('dialogEliminar', ".$row['ID_TipoTramites'].")'>Eliminar</button>
+            </td>
+          </tr>";
+    }
+    echo $cadena;
+        
   desconectar($conexion); 
   }
 ?>
