@@ -27,6 +27,7 @@ if (isset($_POST['action']))
 }
 function GuardarTipoTramite($descripcion,$estado)
 {
+    ob_clean();
     $conexion = conectar();
     $sql2 = "SELECT * FROM `Archivos_TipoTramites` WHERE `Descripcion` = '{$descripcion}'";
     $res = mysqli_query($conexion, $sql2);

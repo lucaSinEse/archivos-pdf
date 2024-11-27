@@ -1,9 +1,13 @@
 //elementos de agregar tipo tramite
-const txtdescripcionTramiteCreado = document.getElementById("txtdescripcionTramiteCreado");
-const cbxestadoTramiteCreado = document.getElementById("cbxestadoTramiteCreado");
-const lblnotificacionagregado = document.getElementById("lblnotificacionagregado");
-
-
+const txtdescripcionTramiteCreado = document.getElementById(
+  "txtdescripcionTramiteCreado"
+);
+const cbxestadoTramiteCreado = document.getElementById(
+  "cbxestadoTramiteCreado"
+);
+const lblnotificacionagregado = document.getElementById(
+  "lblnotificacionagregado"
+);
 
 function abrirDialog(id) {
   const dialog = document.getElementById(id);
@@ -20,37 +24,46 @@ function abrirDialogEditar(idDialog, id_TipoTramite) {
   console.log(id_TipoTramite);
 }
 
-
 function abrirNav() {
   const navHamburguesa = document.getElementById("nav-hamburguesa");
-  navHamburguesa.classList.toggle('active');
+  navHamburguesa.classList.toggle("active");
 }
 
 function AgregarTipoTramite() {
- 
   $.ajax({
     type: "POST",
     url: "./php/phpinserts.php",
-    // data: datos,
     data: {
-        action: 'GuardarTipoTramite',
-        Descripcion: txtdescripcionTramiteCreado.value,
-        estado: cbxestadoTramiteCreado.checked
-
+      action: "GuardarTipoTramite",
+      Descripcion: txtdescripcionTramiteCreado.value,
+      estado: cbxestadoTramiteCreado.checked,
     },
-    success: function(data) {
-      console.log(data);
-    
-        if(data ==="esta"){
-          lblnotificacionagregado.innerText = "esta";
-        }else{
-          if(data === "guardado"){
-            lblnotificacionagregado.innerText ="Se guardo correctamente";
-          }else{
-            lblnotificacionagregado.innerText ="Error BD";
-          }
+    success: function (data) {
+      if (data === "esta") {
+        lblnotificacionagregado.innerText = "esta";
+      } else {
+        if (data === "guardado") {
+          lblnotificacionagregado.innerText = "Se guardo correctamente";
+        } else {
+          lblnotificacionagregado.innerText = "Error BD";
         }
-    }
-});
+      }
+    },
+  });
+}
 
+function ObtenerTipoTramites() {
+  $.ajax({
+    type: "POST",
+    url: "./php/phpgets.php",
+    data: {
+      action: "ObtenerTipoTramites",
+    },
+    success: function (data) {
+      console.log(data); 
+    },
+    error: function (xhr, status, error) {
+      console.error("Error en la solicitud AJAX:", error);
+    },
+  });
 }

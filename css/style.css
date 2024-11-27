@@ -147,7 +147,7 @@ dialog .opciones {
   align-items: center;
 }
 
-#estadoTramiteCreado {
+#cbxestadoTramiteCreado {
   width: 20px;
   height: 20px;
   accent-color: #4CAF50;
