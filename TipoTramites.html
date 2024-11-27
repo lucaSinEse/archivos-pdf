@@ -48,7 +48,6 @@
           <th>descripción</th>
           <th>Estado</th>
           <th>Editar</th>
-          <th>Eliminar</th>
         </tr>
         <tbody id="obtenerTipoTramites">
         
@@ -78,19 +77,6 @@
         <button 
         class="eliminar"
         onclick="cerrarDialog('formularioEditar')">Cerrar</button>
-      </div>
-    </dialog>
-
-    <dialog id="dialogEliminar">
-      <h2>¿Seguro que queres eliminar este tramite?</h2>
-      <p id="idEliminar"></p>
-      <div class="opciones">
-        <button
-        class="eliminar">Si, eliminar tramite</button>
-        <button class="crear"
-        onclick="cerrarDialog('dialogEliminar')">
-          No, cerrar
-        </button>
       </div>
     </dialog>
   </main>

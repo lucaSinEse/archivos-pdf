@@ -66,11 +66,6 @@
               class='editar'
               onclick='abrirDialogEditar('formularioEditar', ".$row['ID_TipoTramites'].")'>Editar</button>
             </td>
-            <td>
-              <button 
-              class='eliminar'
-              onclick='abrirDialog('dialogEliminar', ".$row['ID_TipoTramites'].")'>Eliminar</button>
-            </td>
           </tr>";
     }
     echo $cadena;
