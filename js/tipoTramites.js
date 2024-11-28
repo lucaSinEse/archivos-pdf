@@ -1,3 +1,5 @@
+console.log("HOLA");
+
 //elementos de agregar tipo tramite
 const txtdescripcionTramiteCreado = document.getElementById(
   "txtdescripcionTramiteCreado"
@@ -39,10 +41,6 @@ function abrirDialogEditar(idDialog, id_TipoTramite) {
   console.log(id_TipoTramite);
 }
 
-function abrirNav() {
-  const navHamburguesa = document.getElementById("nav-hamburguesa");
-  navHamburguesa.classList.toggle("active");
-}
 
 function AgregarTipoTramite() {
   $.ajax({

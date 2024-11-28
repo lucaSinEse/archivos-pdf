@@ -1,3 +1,7 @@
+function abrirNav() {
+  const navHamburguesa = document.getElementById("nav-hamburguesa");
+  navHamburguesa.classList.toggle("active");
+};
 document.write(`
   <header>
     <div class="button-container">
@@ -14,6 +18,9 @@ document.write(`
         <li>
           <a href="./TipoTramites.html">Tipos de Tramites</a>
         </li>
+        <li>
+          <a href="./archivos.html">Subir PDF</a>
+        </li>
       </ul>
     </nav>
 
@@ -25,6 +32,9 @@ document.write(`
       <li>
         <a href="./TipoTramites.html">Tipos de Tramites</a>
       </li>
+      <li>
+          <a href="./archivos.html">Subir PDF</a>
+        </li>
     </ul>
   </div>
   </header>

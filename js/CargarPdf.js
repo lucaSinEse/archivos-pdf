@@ -1,3 +1,27 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const checkbox = document.getElementById("addCuenta");
+  
+  const inputContainers = document.querySelectorAll(".inputContainer");
+
+  checkbox.addEventListener("change", () => {
+    const isChecked = checkbox.checked;
+
+    inputContainers.forEach((container) => {
+      if (isChecked) {
+        container.style.display = "flex";
+      } else {
+        container.style.display = "none";
+      }
+    });
+  });
+
+  if (!checkbox.checked) {
+    inputContainers.forEach((container) => {
+      container.style.display = "none";
+    });
+  }
+});
+
 document.getElementById("uploadBtn").addEventListener("click", function () {
   const folderInput = document.getElementById("folderName");
   const fileInput = document.getElementById("pdfFile");

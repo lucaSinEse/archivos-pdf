@@ -195,6 +195,138 @@ footer {
   justify-content: center;
 }
 
+.subirArchivosContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.subirArchivosContainer h2 {
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 24px;
+}
+.inputsContainer {
+  width: 90%;
+  height: 20%;
+  display: flex;
+  gap: 15px;
+}
+
+.inputSocioContainer {
+  background-color: #f9f9f9;
+  height: 10vh;
+  height: auto; 
+  color: #333;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+.inputSocioContainer,
+.inputContainer,
+.checkboxContainer {
+  background-color: #ffffff;
+  height: auto;
+  width: calc(33.333% - 10px);
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 10px;
+  gap: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.inputSocioContainer label,
+.inputContainer label,
+.checkboxContainer label {
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  color: #555;
+}
+
+.inputSocioContainer select,
+.inputContainer select {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+}
+
+.checkboxContainer input[type="checkbox"] {
+  width: auto;
+  margin-left: 5px;
+  transform: scale(1.5);
+  accent-color: #4CAF50;
+}
+
+.archivoContainer {
+  width: 50%;
+  height: auto; 
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; 
+  gap: 10px;
+}
+
+.archivoContainer input[type="file"] {
+  display: none; /* Oculta el input original */
+}
+
+.archivoContainer label {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #ca1010;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.archivoContainer label:hover {
+  background-color: #b10d0d;
+  transform: scale(1.05); /* Efecto de zoom al pasar el cursor */
+}
+
+.archivoContainer label:active {
+  background-color: #a30c0c;
+  transform: scale(0.98); /* Reduce ligeramente al hacer clic */
+}
+
+/* Mensaje adicional opcional */
+.archivoContainer p {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+  text-align: center;
+}
+
 @media (max-width: 1050px) {
   header {
     display: flex;
@@ -246,6 +378,8 @@ footer {
 
   .nav-list li {
     height: 30%;
+    display: flex;
+    align-items: center;
   }
 
   .nav-list li a {
