@@ -10,6 +10,10 @@
         ObtenerTipoTramites();
         break;
 
+      case 'ObtenerTipoTramitesActivos':
+        ObtenerTipoTramitesActivos();
+        break;
+
       case 'ObtenerSocios':
         ObtenerSocios();
         break;
@@ -56,6 +60,21 @@
     echo $cadena;
         
   desconectar($conexion); 
+  }
+
+  function ObtenerTipoTramitesActivos() {
+    $conexion = conectar();
+
+    $sql = "SELECT * FROM `Archivos_TipoTramites` WHERE `Estado` = 1"; 
+
+    $result = mysqli_query($conexion, $sql);
+    $cadena = "";
+
+    while ($row = mysqli_fetch_array($result)) {
+        $cadena .= "<option value='" . $row['ID_TipoTramites'] . "'>" . $row['Descripcion'] . "</option>";
+    }
+    echo $cadena;
+    desconectar($conexion);
   }
 
   function ObtenerSocios() {
