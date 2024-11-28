@@ -9,7 +9,11 @@
       case 'ObtenerTipoTramites':
         ObtenerTipoTramites();
         break;
-      
+
+      case 'ObtenerSocios':
+        ObtenerSocios();
+        break;
+        
       default:
         echo json_encode(["error" => "Acción no válida"]);
         break;
@@ -71,5 +75,19 @@
     echo $cadena;
         
   desconectar($conexion); 
+  }
+
+  function ObtenerSocios() {
+    
+    $conexion = conectar();
+    $sql = "SELECT * FROM `socios`";
+
+    $result = mysqli_query($conexion, $sql);
+    $cadena = "";
+    while ($row = mysqli_fetch_array($result)) {
+      $cadena += "<option value='".$row['Nombre']."'>Volvo</option>";
+    }
+    echo $cadena;
+    desconectar($conexion); 
   }
 ?>

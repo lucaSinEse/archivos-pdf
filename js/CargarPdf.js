@@ -1,3 +1,7 @@
+$(document).ready(function() {
+  obtenerSocios();
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const checkbox = document.getElementById("addCuenta");
   
@@ -21,6 +25,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+function obtenerSocios() {
+  console.log("socios");
+  $.ajax({
+    type: "POST",
+    url: "./php/phpgets.php",
+    data: {
+      action: "ObtenerSocios",
+    },
+    success: function (data) {
+      console.log(data);
+    },
+    error: function (xhr, status, error) {
+      console.error("Error en la solicitud AJAX:", error);
+    },
+  });
+}
 
 document.getElementById("uploadBtn").addEventListener("click", function () {
   const folderInput = document.getElementById("folderName");
