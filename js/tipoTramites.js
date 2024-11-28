@@ -67,27 +67,31 @@ function AgregarTipoTramite() {
   if(txtdescripcionTramiteCreado.value ==""){
     lblnotificacionagregado.innerText = "complete el campo descripcion";
   }else{
-    $.ajax({
-      type: "POST",
-      url: "./php/phpinserts.php",
-      data: {
-        action: "GuardarTipoTramite",
-        Descripcion: txtdescripcionTramiteCreado.value,
-        estado: cbxestadoTramiteCreado.checked,
-      },
-      success: function (data) {
-        if (data == "esta") {
-          lblnotificacionagregado.innerText = "esta";
-        } else {
-          if (data == "guardado") {
-            lblnotificacionagregado.innerText = "Se guardo correctamente";
-            ObtenerTipoTramites();
+    if(validarString(txtdescripcionTramiteCreado.value)){
+      $.ajax({
+        type: "POST",
+        url: "./php/phpinserts.php",
+        data: {
+          action: "GuardarTipoTramite",
+          Descripcion: txtdescripcionTramiteCreado.value,
+          estado: cbxestadoTramiteCreado.checked,
+        },
+        success: function (data) {
+          if (data == "esta") {
+            lblnotificacionagregado.innerText = "Tramite ya existente";
           } else {
-            lblnotificacionagregado.innerText = "Error BD";
+            if (data == "guardado") {
+              lblnotificacionagregado.innerText = "Se guardo correctamente";
+              ObtenerTipoTramites();
+            } else {
+              lblnotificacionagregado.innerText = "Error BD";
+            }
           }
-        }
-      },
-    });
+        },
+      });
+    }else{
+      lblnotificacionagregado.innerText = "Caracteres no validos";
+    }
   }
 }
 
@@ -112,33 +116,43 @@ function editarTramite(){
   if(descripcionTramiteEditado.value =="") {
     lblnotificacioneditado.innerText = "Complete el campo descripcion";
   }else{
-    $.ajax({
-      type: "POST",
-      url: "./php/phpupdate.php",
-      data: {
-        action: "EditarTipotramite",
-        descripcion : descripcionTramiteEditado.value,
-        estado: estadoTramiteEditado.checked,
-        idtipotramite: lblIdTipotramite.textContent
-      },
-      success: function (data) {
-        console.log(data);
-        if (data == "esta") {
-          lblnotificacioneditado.innerText = "Ese nombre ya se encuentra";
-        } else {
-          if (data == "modificado") {
-            lblnotificacioneditado.innerText = "Se modificado correctamente";
-            ObtenerTipoTramites();
+    if(validarString(descripcionTramiteEditado.value)){
+      $.ajax({
+        type: "POST",
+        url: "./php/phpupdate.php",
+        data: {
+          action: "EditarTipotramite",
+          descripcion : descripcionTramiteEditado.value,
+          estado: estadoTramiteEditado.checked,
+          idtipotramite: lblIdTipotramite.textContent
+        },
+        success: function (data) {
+          if (data == "esta") {
+            lblnotificacioneditado.innerText = "Ese nombre ya se encuentra";
           } else {
-            lblnotificacioneditado.innerText = "Error BD";
+            if (data == "modificado") {
+              lblnotificacioneditado.innerText = "Se ha modificado correctamente";
+              ObtenerTipoTramites();
+            } else {
+              lblnotificacioneditado.innerText = "Error BD";
+            }
           }
-        }
-      },
-      error: function (xhr, status, error) {
-        console.error("Error en la solicitud AJAX:", error);
-      },
-    });
+        },
+        error: function (xhr, status, error) {
+          console.error("Error en la solicitud AJAX:", error);
+        },
+      });
+    }else{
+      lblnotificacioneditado.innerText = "Los caracteres no son validos";
+    }
   }
   
 }
 
+function validarString(s) {
+  // Definir los caracteres no permitidos
+  const caracteresNoPermitidos = /['"!]/;
+
+  // Verificar si el string contiene algún caracter no permitido
+  return !caracteresNoPermitidos.test(s);
+}
