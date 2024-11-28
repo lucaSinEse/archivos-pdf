@@ -63,8 +63,8 @@
             <td>". $estado."</td>
             <td>
               <button 
-              class='editar'
-              onclick='abrirDialogEditar('formularioEditar', ".$row['ID_TipoTramites'].")'>Editar</button>
+              class=\"editar\"
+              onclick=\"abrirDialogEditar('formularioEditar', '".$row['ID_TipoTramites']."','".$row['Estado']."', '".$row['Descripcion']."')\">Editar</button>
             </td>
           </tr>";
     }
