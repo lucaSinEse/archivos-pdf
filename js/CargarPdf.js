@@ -1,25 +1,75 @@
-const items = document.getElementById(
-  "items"
-);
+const checkbox = document.getElementById("addCuenta");
+const itemsSocio = document.getElementById("itemsSocio");
+const inputSocio = document.getElementById("txtSocio");
+const itemsCuenta = document.getElementById("itemsCuenta");
+const inputCuenta = document.getElementById("txtCuenta");
+const itemServicio = document.getElementById("itemsServicio");
+
+const messageError = document.getElementById("messageError");
+const messagePdf = document.getElementById("message-pdf");
 
 $(document).ready(function() {
   obtenerSocios();
 });
 
+function obtenerSocios() {
+  console.log("Cargando socios...");
+  $.ajax({
+    type: "POST",
+    url: "./php/phpgets.php",
+    data: {
+      action: "ObtenerSocios",
+    },
+    success: function (data) {  
+      itemsSocio.innerHTML = data;
+    },
+    error: function (xhr, status, error) {
+      console.error("Error en la solicitud AJAX:", error);
+    },
+  });
+}
+
+function obtenerServicios() {
+  console.log("Cargando Servicios...");
+  $.ajax({
+    type: "POST",
+    url: "./php/phpgets.php",
+    data: {
+      action: "ObtenerServicios",
+    },
+    success: function(data) {
+      itemServicio.innerHTML = data;
+    },
+    error: function(xhr, status, error) {
+      console.error("Error en la solicitud AJAX:", error);
+    }
+  })
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  const checkbox = document.getElementById("addCuenta");
-  
   const inputContainers = document.querySelectorAll(".inputContainer");
+  
+  inputSocio.addEventListener("change", () => {
+    if (isSocioValido()) {
+      inputCuenta.value = "";
+      const socioId = inputSocio.value.trim();
+      obtenerCuentasSocio(socioId);
+      messageError.style.display = "none";
+      messageError.classList.remove("error-visible");
+    } else {
+      messageError.style.display = "flex";
+    messageError.textContent = "Socio no válido";
+    messageError.classList.add("error-visible");
+    }
+  })
 
   checkbox.addEventListener("change", () => {
     const isChecked = checkbox.checked;
-
+    if(isChecked) {
+      obtenerServicios();
+    }
     inputContainers.forEach((container) => {
-      if (isChecked) {
-        container.style.display = "flex";
-      } else {
-        container.style.display = "none";
-      }
+      container.style.display = isChecked ? "flex" : "none";
     });
   });
 
@@ -30,17 +80,22 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-function obtenerSocios() {
-  console.log("socios");
+function isSocioValido() {  
+  const options = Array.from(itemsSocio.options);
+  return options.some(option => option.value === inputSocio.value.trim());
+}
+
+function obtenerCuentasSocio(socioId) {
+  console.log("Obteniendo cuentas del socio con ID:", socioId);
   $.ajax({
     type: "POST",
     url: "./php/phpgets.php",
     data: {
-      action: "ObtenerSocios",
+      action: "ObtenerCuentasSocio",
+      Id_Socio: socioId,
     },
     success: function (data) {
-      console.log(data);
-      items.innerHTML = data;
+      itemsCuenta.innerHTML = data;
     },
     error: function (xhr, status, error) {
       console.error("Error en la solicitud AJAX:", error);
@@ -79,12 +134,11 @@ document.getElementById("uploadBtn").addEventListener("click", function () {
   xhr.send(formData);
 
   xhr.onload = function () {
-    const messageDiv = document.getElementById("message");
     if (xhr.status === 200) {
-      messageDiv.textContent = "Archivo subido correctamente.";
+      messagePdf.textContent = "Archivo subido correctamente.";
     } else {
-      messageDiv.textContent = "Error al subir el archivo.";
-      messageDiv.style.color = "red";
+      messagePdf.textContent = "Error al subir el archivo.";
+      messagePdf.style.color = "red";
     }
   };
   xhr.onerror = function () {

@@ -253,13 +253,14 @@ footer {
 .inputContainer label,
 .checkboxContainer label {
   width: 100%;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   color: #555;
 }
 
-.inputSocioContainer select,
-.inputContainer select {
+.inputSocioContainer input,
+.inputSocioContainer textarea,
+.inputContainer input {
   width: 100%;
   padding: 8px;
   font-size: 14px;
@@ -292,7 +293,7 @@ footer {
 }
 
 .archivoContainer input[type="file"] {
-  display: none; /* Oculta el input original */
+  display: none;
 }
 
 .archivoContainer label {
@@ -325,6 +326,12 @@ footer {
   color: #666;
   margin: 0;
   text-align: center;
+}
+
+.error-visible {
+  background-color: red;
+  font-size: 24px;
+  font-weight: 500;
 }
 
 @media (max-width: 1050px) {

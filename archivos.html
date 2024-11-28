@@ -11,11 +11,22 @@
    <main>
         <section class="subirArchivosContainer">
            <h2>Subir archivos PDF</h2>
+           <p id="messageError"></p>
          <div class="inputsContainer">
             <div class="inputSocioContainer">
-               <label for="cars">Socio</label>
-               <input type="text" list="items" class="cajaText" id="txtSocio" placeholder="Apellido y Nombre del Socio | Ej:CABRERA JUAN CARLOS" name="socio">
-                  <datalist class="cajaText" id="items">
+               <label for="socio">Socio</label>
+               <input type="text" list="itemsSocio" class="cajaText" id="txtSocio" placeholder="Apellido y Nombre del Socio" name="socio">
+                  <datalist class="cajaText" id="itemsSocio">
+                  </datalist>
+            </div>
+            <div class="inputSocioContainer">
+               <label for="descripcion">Descripción</label>
+               <textarea id="txtDescripcion" placeholder="Descripción" name="descripcion" class="cajaText"></textarea>
+            </div>
+            <div class="inputSocioContainer">
+               <label for="tipoTramte">Tipo de Tramite</label>
+               <input type="text" list="items" class="cajaText" id="txtTipoTramite" placeholder="Tipo de Tramite" name="tipoTramte">
+                  <datalist class="cajaText" id="itemsTipoTramite">
                   </datalist>
             </div>
             <div class="checkboxContainer">
@@ -23,47 +34,34 @@
                <input type="checkbox" name="addCuenta"
                 id="addCuenta">
             </div>
+         </div>
+
+         <div class="inputsContainer">
             <div class="inputContainer">
                <label for="cuenta">Cuenta</label>
-               <select id="cuenta" name="cuenta">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="fiat">Fiat</option>
-                  <option value="audi">Audi</option>
-                </select>
-            </div>
-            <div class="inputContainer">
-               <label for="manzana">Manzana</label>
-               <select id="manzana" name="manzana">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="fiat">Fiat</option>
-                  <option value="audi">Audi</option>
-                </select>
-            </div>
-            <div class="inputContainer">
-               <label for="lote">Lote</label>
-               <select id="lote" name="lote">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="fiat">Fiat</option>
-                  <option value="audi">Audi</option>
-                </select>
+               <input type="text" list="itemsCuenta" class="cajaText" id="txtCuenta" placeholder="Cuenta del Socio" name="cuenta">
+                  <datalist class="cajaText" id="itemsCuenta">
+                  </datalist>
             </div>
             <div class="inputContainer">
                <label for="servicio">Servicio</label>
-               <select id="servicio" name="servicio">
-                  <option value="volvo">Volvo</option>
-                  <option value="saab">Saab</option>
-                  <option value="fiat">Fiat</option>
-                  <option value="audi">Audi</option>
-                </select>
+               <input type="text" list="itemsServicio" class="cajaText" id="txtServicio" placeholder="Servicios" name="servicios">
+                  <datalist class="cajaText" id="itemsServicio">
+                  </datalist>
+            </div>
+            <div class="inputContainer">
+               <label for="manzana">Manzana</label>
+               <input type="text" name="manzana" id="txtmanzana" placeholder="Manzana">
+            </div>
+            <div class="inputContainer">
+               <label for="lote">Lote</label>
+               <input type="text" name="lote" id="txtlote" placeholder="Lote">
             </div>
          </div>
          <div class="archivoContainer">
             <label for="pdfFile">Seleccionar archivo PDF</label>
             <input type="file" id="pdfFile" accept="application/pdf" multiple>
-            <p id="message"></p>
+            <p id="message-pdf"></p>
           </div>
         <button id="uploadBtn" class="crear">Subir PDFs</button>
         </section>
