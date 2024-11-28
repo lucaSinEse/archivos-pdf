@@ -14,13 +14,9 @@
          <div class="inputsContainer">
             <div class="inputSocioContainer">
                <label for="cars">Socio</label>
-               <select id="cars" name="cars">
-                 <option value="volvo">Volvo</option>
-                 <option value="saab">Saab</option>
-                 <option value="fiat">Fiat</option>
-                 <option value="audi">Audi</option>
-                 <option value="audi">Cristobal Colon cualquiera no</option>
-               </select>
+               <input type="text" list="items" class="cajaText" id="txtSocio" placeholder="Apellido y Nombre del Socio | Ej:CABRERA JUAN CARLOS" name="socio">
+                  <datalist class="cajaText" id="items">
+                  </datalist>
             </div>
             <div class="checkboxContainer">
                <label for="addCuenta">Agregar Cuenta</label>

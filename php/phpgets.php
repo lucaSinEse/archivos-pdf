@@ -85,7 +85,7 @@
     $result = mysqli_query($conexion, $sql);
     $cadena = "";
     while ($row = mysqli_fetch_array($result)) {
-      $cadena += "<option value='".$row['Nombre']."'>Volvo</option>";
+      $cadena = $cadena . "<option value='".$row['Id_Socio']."'>".$row['Nombre']."</option>";
     }
     echo $cadena;
     desconectar($conexion); 

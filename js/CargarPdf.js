@@ -1,3 +1,7 @@
+const items = document.getElementById(
+  "items"
+);
+
 $(document).ready(function() {
   obtenerSocios();
 });
@@ -36,6 +40,7 @@ function obtenerSocios() {
     },
     success: function (data) {
       console.log(data);
+      items.innerHTML = data;
     },
     error: function (xhr, status, error) {
       console.error("Error en la solicitud AJAX:", error);
