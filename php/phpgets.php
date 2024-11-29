@@ -23,10 +23,14 @@
         ObtenerCuentasSocio($Id_Socio);
         break;
       
-        case 'ObtenerServicios':
-          ObtenerServicios();
+      case 'ObtenerServicios':
+        ObtenerServicios();
         break;
-        
+  
+      case 'ObtenerTipoTramitesLista':
+        ObtenerTipoTramitesLista();
+        break;
+
       default:
         echo json_encode(["error" => "Acción no válida"]);
         break;
@@ -112,6 +116,20 @@
 
     while($row = mysqli_fetch_array($result) ) {
       $cadena = $cadena . "<option value='".$row['Id_Servicio']."'>".$row['Nombre']."</option>";
+    }
+    echo $cadena;
+    desconectar($conexion); 
+  }
+
+
+  function ObtenerTipoTramitesLista() {
+    $conexion = conectar();
+    $sql = "SELECT * FROM `Archivos_TipoTramites`";
+    $result = mysqli_query($conexion, $sql);
+    $cadena = "";
+
+    while($row = mysqli_fetch_array($result) ) {
+      $cadena = $cadena . "<option value='".$row['ID_TipoTramites']."'>".$row['Descripcion']."</option>";
     }
     echo $cadena;
     desconectar($conexion); 
