@@ -120,18 +120,4 @@
     echo $cadena;
     desconectar($conexion); 
   }
-
-
-  function ObtenerTipoTramitesLista() {
-    $conexion = conectar();
-    $sql = "SELECT * FROM `Archivos_TipoTramites`";
-    $result = mysqli_query($conexion, $sql);
-    $cadena = "";
-
-    while($row = mysqli_fetch_array($result) ) {
-      $cadena = $cadena . "<option value='".$row['ID_TipoTramites']."'>".$row['Descripcion']."</option>";
-    }
-    echo $cadena;
-    desconectar($conexion); 
-  }
 ?>
