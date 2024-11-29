@@ -22,13 +22,11 @@ const messagePdf = document.getElementById("message-pdf");
 $(document).ready(() => {
   obtenerSocios();
   obtenerTipoTramiteActivo();
+  obtenerServicios();
 
   const inputContainers = document.querySelectorAll(".inputContainer");
   checkbox.addEventListener("change", () => {
     const isChecked = checkbox.checked;
-    if (isChecked) {
-      obtenerServicios();
-    }
     inputContainers.forEach((container) => {
       container.style.display = isChecked ? "flex" : "none";
     });
@@ -175,6 +173,7 @@ function obtenerCuentasSocio(socioId) {
 }
 
 document.getElementById("uploadBtn").addEventListener("click", function () {
+  //? Validaciones de caracteres
   const validDescripcion = validarCaracteres(textareaDescripcion);
   const validManzana = validarCaracteres(manzanaInput);
   const validLote = validarCaracteres(loteInput, "Lote");
@@ -190,6 +189,80 @@ document.getElementById("uploadBtn").addEventListener("click", function () {
     return;
   }
 
+  //? Validaciones de caracteres nulos
+  if(!checkbox.checked){
+    if(inputSocio.value == "" || txtDescripcion.value =="" || inputTipoTramite.value == "" || inputServicio.value == ""){
+      messageError.style.display = "flex";
+      messageError.textContent = "Faltan campos";
+      messageError.classList.add("error-visible");
+      return;
+    }
+  } else{
+    if(inputSocio.value == "" || txtDescripcion.value =="" || inputTipoTramite.value == "" || inputServicio.value == "" || inputCuenta.value == "" || txtmanzana.value == "" || txtlote.value == "") {
+      messageError.style.display = "flex";
+      messageError.textContent = "Faltan campos";
+      messageError.classList.add("error-visible");
+      return;
+    }
+  }
+
   //? Aca seguiria todo lo relacionado con la subida del pdf.
+  const fileInput = document.getElementById("pdfFile");
+  const files = fileInput.files;
+  let path = ``;
+  if(!checkbox.checked) {
+     path = `${inputSocio.value}`;
+  } else {
+     path = `${inputSocio.value}/${inputCuenta.value}`;
+  }
+
+  if (files.length === 0) {
+    messageError.style.display = "flex";
+    messageError.textContent = "Por favor, selecciona al menos un archivo PDF.";
+    messageError.classList.add("error-visible");
+    return;
+  }
+
+  const formData = new FormData();
+  for (let i = 0; i < files.length; i++) {
+    if (files[i].type !== "application/pdf") {
+      messageError.style.display = "flex";
+      messageError.textContent = "Solo se permiten archivos PDF.";
+      messageError.classList.add("error-visible");
+      return;
+    }
+    formData.append("pdf[]", files[i]);
+  }
+
+  formData.append("folder", path);
+  formData.append("checkbox", checkbox.checked);
+  formData.append("socio", inputSocio.value);
+  formData.append("descripcion", txtDescripcion.value);
+  formData.append("tipoTramite", inputTipoTramite.value);
+  formData.append("servicio", inputServicio.value);
+  formData.append("cuenta", inputCuenta.value);
+  formData.append("manzana", txtmanzana.value);
+  formData.append("lote", txtlote.value);
   
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "./php/subirPdf.php", true);
+  xhr.onload = () => {
+    if(xhr.status === 200) {
+      messageError.style.display = "flex";
+      messageError.textContent = "Archivo subido correctamente";
+      messageError.classList.add("error-visible");
+    } else {
+      messageError.style.display = "flex";
+      messageError.textContent = "Error al subir el archivo.";
+      messageError.classList.add("error-visible");
+      return;
+    }
+  }
+  xhr.error = () => {
+    alert("Hubo un error al enviar el archivo.");
+    messageError.style.display = "flex";
+    messageError.textContent = "Hubo un error al enviar el archivo.";
+    messageError.classList.add("error-visible");
+  }
+  xhr.send(formData);
 });

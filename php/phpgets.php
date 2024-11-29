@@ -27,9 +27,6 @@
         ObtenerServicios();
         break;
   
-      case 'ObtenerTipoTramitesLista':
-        ObtenerTipoTramitesLista();
-        break;
 
       default:
         echo json_encode(["error" => "Acción no válida"]);
@@ -75,7 +72,7 @@
     $cadena = "";
 
     while ($row = mysqli_fetch_array($result)) {
-        $cadena .= "<option value='" . $row['ID_TipoTramites'] . "'>" . $row['Descripcion'] . "</option>";
+        $cadena .= "<option value='" . $row['Descripcion'] . "'>" . $row['ID_TipoTramites'] . "</option>";
     }
     echo $cadena;
     desconectar($conexion);
@@ -115,7 +112,7 @@
     $cadena = "";
 
     while($row = mysqli_fetch_array($result) ) {
-      $cadena = $cadena . "<option value='".$row['Id_Servicio']."'>".$row['Nombre']."</option>";
+      $cadena = $cadena . "<option value='".$row['Nombre']."'>".$row['Id_Servicio']."</option>";
     }
     echo $cadena;
     desconectar($conexion); 
