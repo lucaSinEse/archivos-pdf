@@ -243,6 +243,11 @@ document.getElementById("uploadBtn").addEventListener("click", function () {
   formData.append("cuenta", inputCuenta.value);
   formData.append("manzana", txtmanzana.value);
   formData.append("lote", txtlote.value);
+
+  console.log("Datos en FormData:");
+  for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+  }
   
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "./php/subirPdf.php", true);
@@ -255,6 +260,8 @@ document.getElementById("uploadBtn").addEventListener("click", function () {
       messageError.style.display = "flex";
       messageError.textContent = "Error al subir el archivo.";
       messageError.classList.add("error-visible");
+      console.log(xhr.status);
+      console.log(xhr);
       return;
     }
   }
