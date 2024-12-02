@@ -49,8 +49,83 @@
 
           $result = mysqli_query($conexion, $sql);
           desconectar($conexion);
-          if(mysqli_num_rows($result) > 0) {
-            echo "se insertaron los datos en Archivos_Tramites";
+          if($result) {
+            echo "se insertaron los datos en Archivos_Tramites \n";
+
+            $conexion = conectar();
+            $sql = "SELECT * FROM `Archivos_Tramites` ORDER BY `ID_Tramite` DESC LIMIT 1";
+            $result = mysqli_query($conexion, $sql);
+            desconectar($conexion);
+
+            if($result && mysqli_num_rows($result) > 0) {
+              echo "se obtuvieron los datos de Archivos_Tramites ";
+              $row = mysqli_fetch_assoc($result);
+              $idTramite = $row['ID_Tramite'];
+              $idSocio = $row['ID_Socio'];
+              $idTipoTramite = $row['ID_TipoTramite'];
+
+              echo "Tramite: ".$idTramite. " socio: ".$idSocio. " tipoTramite". $idTipoTramite." ";
+
+              $conexion = conectar();
+              $sqlTipoTramite = "SELECT `Descripcion` FROM `Archivos_TipoTramites` WHERE `ID_TipoTramites` = '$idTipoTramite'";
+              $resultTipoTramite = mysqli_query($conexion, $sqlTipoTramite);
+              desconectar($conexion);
+              if($resultTipoTramite && mysqli_num_rows($resultTipoTramite) > 0){
+                echo "se obtuvieron los datos de Archivos_TipoTramites ";
+
+                $rowTipoTramite = mysqli_fetch_assoc($resultTipoTramite);
+                $descripcionTipoTramite = $rowTipoTramite['Descripcion'];
+                echo $descripcionTipoTramite." ";
+
+                $idSocio = intval($idSocio);
+                $pathArchivoBase = "./../Archivos/" . $idSocio;
+                echo "Ruta base: $pathArchivoBase "; 
+                
+                if (!is_dir($pathArchivoBase)) {
+                  if (!mkdir($pathArchivoBase, 0777, true)) {
+                      $errorMensaje = error_get_last();
+                      $response['error'] = "Error al crear el directorio de almacenamiento: $pathArchivoBase. Detalles: " . $errorMensaje['message'];
+                      echo json_encode($response);
+                      exit;
+                  }
+                }
+                echo "Por entrar al foreach ";
+                foreach ($_FILES['pdf']['name'] as $key => $originalNombreArchivo) {
+                  $nombreArchivo = $descripcionTipoTramite . "_" . uniqid() . "_$key.pdf";
+                  $pathArchivo = $pathArchivoBase . "/" . $nombreArchivo;
+                  $fecha = date("Y-m-d");
+                  $hora = date("H:i:s");
+
+                  if (move_uploaded_file($_FILES['pdf']['tmp_name'][$key], $pathArchivo)) {
+                    echo "Por mover lospdf a la carpeta. ". $pathArchivo. " ";
+                    $conexion = conectar();
+                    $sql = "INSERT INTO `Archivos_Pdfs` 
+                            (`ID_Tramite`, `ID_Usuario`, `Nombre`, `Path`, `Fecha`, `Hora`)
+                            VALUES ('$idTramite', '1', '$nombreArchivo', '$pathArchivo', '$fecha', '$hora')";
+                    $result = mysqli_query($conexion, $sql);
+                    desconectar($conexion);
+
+                    if($result) {
+                      echo "Se registro el pdf en la base de datos. ";
+                    } else {
+                      $response['error'] = "Error al crear el registro de Archivos_Pdf.";
+                      echo json_encode($response);
+                      exit;
+                    }
+                  }
+                }
+              } else {
+                $response['error'] = "No se obtuvieron los datos de Archivos_TipoTramites";
+                http_response_code(500);
+                echo json_encode($response);
+                exit;
+              }
+            } else {
+              $response['error'] = "No se obtuvieron los datos de Archivos_Tramites";
+              http_response_code(500);
+              echo json_encode($response);
+              exit;
+            }
           } else {
             $response['error'] = "No se insertaron los datos en Archivos_Tramites";
             http_response_code(500);
