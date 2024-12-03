@@ -9,15 +9,12 @@
 <body>
   <script src="./js/components/header.js"></script>
   <main>
-    <div class="TableroDeBusqueda">
-      
-
-    </div>
+    <section class="filtro">
+      <h2>Filtro</h2>
+      <input type="text" name="filtro" id="filtro" placeholder="Ingresar numero de socio o cuenta">
+      <button onclick="filtrar()" class="crear">Filtrar</button>
+    </section>
     <div class="agregarTramites">
-      <!-- <button
-      class="crear"
-      onclick="abrirDialog('')">
-      </button> -->
       <table>
         <tr class="tipos">
           <th>NroTramite</th>
@@ -26,7 +23,12 @@
           <th>Pdf</th>
         </tr>
         <tbody id="obtenerTipoTramites">
-        
+        <tr class="tipos">
+          <td>1</td>
+          <td>desc tramite</td>
+          <td>1</td>
+          <th>pede efe</th>
+        </tr>
         </tbody>
       </table>
     </div>
