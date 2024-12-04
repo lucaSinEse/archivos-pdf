@@ -26,6 +26,11 @@
       case 'ObtenerServicios':
         ObtenerServicios();
         break;
+
+      case 'ObtenerTramites':
+        $inputValue = $_POST['inputValue'];
+        ObtenerTramites($inputValue);
+        break;
   
 
       default:
@@ -116,5 +121,48 @@
     }
     echo $cadena;
     desconectar($conexion); 
+  }
+
+  function ObtenerTramites($inputValue) {
+    $conexion = conectar();
+    $sql = "SELECT a.ID_Tramite, t.Descripcion DesTipoTramite, s.Nombre Servicio, a.Descripcion, a.ID_Socio, socio.Nombre, a.ID_Cuenta, a.NumeroManzana, a.NumeroLote
+            FROM `Archivos_Tramites` AS `a`
+            INNER JOIN `Archivos_TipoTramites` AS `t` ON a.ID_TipoTramite = t.ID_TipoTramites
+            INNER JOIN `servicios` AS `s` ON a.ID_Servicio = s.Id_Servicio
+            INNER JOIN `socios` AS `socio` ON a.ID_Socio = socio.Id_Socio
+            WHERE `ID_Tramite` LIKE '%$inputValue%'
+            OR t.Descripcion LIKE '%$inputValue%'
+            OR s.Nombre LIKE '%$inputValue%'
+            OR a.ID_Socio LIKE '%$inputValue%'
+            OR socio.Nombre LIKE '%$inputValue%'
+            OR `ID_Cuenta` LIKE '%$inputValue%'";
+    
+    $result = mysqli_query($conexion, $sql);
+
+    if ($result) {
+      $cadena = "";
+      while ($row = mysqli_fetch_array($result)) {
+          $cadena = $cadena . "<tr class='tipos'>
+                                <td>". $row['ID_Tramite'] ."</td>
+                                <td>". $row['DesTipoTramite'] ."</td>
+                                <td>". $row['Servicio'] ."</td>
+                                <td>". $row['Descripcion'] ."</td>
+                                <td>
+                                  ". $row['ID_Socio'] ."<br>
+                                  ". $row['Nombre'] ."<br>
+                                </td>
+                                <td>
+                                Cuenta: ". $row['ID_Cuenta'] ."<br>
+                                Manzana: ". $row['NumeroManzana'] ."<br>
+                                  Lote: ". $row['NumeroLote'] ."<br>
+                                </td>
+                                <td><a href='#' onclick='verPdf(". $row['ID_Tramite'] .")'>Ver PDF</a></td>
+                              </tr>";
+      }
+      echo $cadena;
+    } else {
+        echo json_encode(["error" => "Error en la consulta: " . mysqli_error($conexion)]);
+    }
+    desconectar($conexion);
   }
 ?>

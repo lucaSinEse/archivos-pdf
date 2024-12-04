@@ -10,25 +10,24 @@
   <script src="./js/components/header.js"></script>
   <main>
     <section class="filtro">
-      <h2>Filtro</h2>
-      <input type="text" name="filtro" id="filtro" placeholder="Ingresar numero de socio o cuenta">
-      <button onclick="filtrar()" class="crear">Filtrar</button>
+      <h2>Busqueda</h2>
+      <input type="text" name="filtro" id="filtro" placeholder="Numero Socio, Tramite, Cuenta, Tipo Tramite, Servicios, etc">
+      <button onclick="buscar()" class="crear">Buscar</button>
     </section>
-    <div class="agregarTramites">
-      <table>
-        <tr class="tipos">
-          <th>NroTramite</th>
-          <th>Tramite</th>
-          <th>Socio</th>
-          <th>Pdf</th>
-        </tr>
-        <tbody id="obtenerTipoTramites">
-        <tr class="tipos">
-          <td>1</td>
-          <td>desc tramite</td>
-          <td>1</td>
-          <th>pede efe</th>
-        </tr>
+    <div class="tablaTramite">
+      <table class="tableTramites">
+        <thead>
+          <tr class="tipos">
+            <th>NroTramite</th>
+            <th>Tramite</th>
+            <th>Servicio</th>
+            <th>Descripcion</th>
+            <th>Socio</th>
+            <th>Info-Cuentas</th>
+            <th>Pdf</th>
+          </tr>
+        </thead>
+        <tbody id="obtenerTramites">
         </tbody>
       </table>
     </div>
