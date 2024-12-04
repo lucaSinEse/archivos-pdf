@@ -31,7 +31,12 @@
         $inputValue = $_POST['inputValue'];
         ObtenerTramites($inputValue);
         break;
-  
+
+      case 'ObtenerPdfDeTramites':
+        $idtramite = $_POST['idtramite'];
+
+        ObtenerPdfDeTramites($idtramite);
+        break;
 
       default:
         echo json_encode(["error" => "Acción no válida"]);
@@ -164,5 +169,20 @@
         echo json_encode(["error" => "Error en la consulta: " . mysqli_error($conexion)]);
     }
     desconectar($conexion);
+  }
+
+
+
+  function ObtenerPdfDeTramites($idtramite) {
+    $conexion = conectar();
+    $sql = "SELECT * FROM `Archivos_Pdfs` WHERE `ID_Tramite` = $idtramite";
+    $result = mysqli_query($conexion, $sql);
+    $cadena = "";
+
+    while($row = mysqli_fetch_array($result) ) {
+      $cadena = $cadena . $row['Path']."///";
+    }
+    echo $cadena;
+    desconectar($conexion); 
   }
 ?>
