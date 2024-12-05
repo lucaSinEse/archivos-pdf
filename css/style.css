@@ -424,8 +424,8 @@ iframe {
 
   header button {
     display: block;
-    background-color: #171717;
-    width: 20%;
+    background-color: #252628;
+    width: 30%;
     height: 100%;
     font-size: 30px;
   }
@@ -506,5 +506,96 @@ iframe {
   footer span {
     font-size: 16px;
     text-align: center;
+  }
+
+  .subirArchivosContainer {
+    gap: 10px; 
+    padding: 15px;
+    overflow: scroll;
+  }
+
+  .subirArchivosContainer h2 {
+    font-size: 20px; 
+    margin-bottom: 10px; 
+    overflow: scroll;
+    height: auto; 
+  }
+
+  .inputsContainer {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    height: auto;
+  }
+
+  .inputSocioContainer,
+  .inputContainer,
+  .checkboxContainer {
+    width: 100%; 
+    flex-direction: column; 
+    gap: 8px;
+  }
+
+  .inputSocioContainer input,
+  .inputSocioContainer textarea,
+  .inputContainer input {
+    font-size: 14px; 
+    padding: 6px;
+  }
+
+  .archivoContainer {
+    width: 100%; 
+    padding: 15px; 
+  }
+
+  .archivoContainer label {
+    font-size: 14px; 
+    padding: 8px 15px; 
+  }
+
+  .archivoContainer p {
+    font-size: 12px;
+    margin-top: 5px;
+  }
+
+  .error-visible {
+    font-size: 18px; 
+    min-width: 50%; 
+  }
+
+  #uploadBtn {
+    font-size: 16px; 
+    padding: 10px 15px; 
+  }
+
+  .filtro {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 20vh;
+    padding: 0;
+    gap: 0;
+  }
+
+  .filtro h2 {
+    font-size: 22px;
+    height: auto;
+  }
+
+  .filtro input {
+    width: 95%; 
+  }
+
+  #Visorpdf {
+    width: 95%;
+    height: 95%;
+  }
+
+  .tablaTramite {
+    width: 99%;
+  }
+
+  iframe {
+    width: 100%;
   }
 }
