@@ -1,6 +1,9 @@
 const inputBusqueda = document.getElementById("filtro");
 const obtenerTramites = document.getElementById("obtenerTramites");
 
+const Visorpdf = document.getElementById("Visorpdf");
+
+
 function buscar() {
   $.ajax({
     type: "POST",
@@ -28,6 +31,7 @@ function verPdf(Idtramite){
     },
     success: (data) => {
       console.log(data);
+      /* Visorpdf.innerHTML ="<iframe src='./Archivos/182982/112183/Capital energia_1.pdf' width='100%' height='600px'></iframe>"; */
       const dialog = document.getElementById("Visorpdf");
       dialog.showModal();
     },
