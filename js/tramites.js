@@ -1,9 +1,9 @@
+
+//? Obtener elementos 
 const inputBusqueda = document.getElementById("filtro");
 const obtenerTramites = document.getElementById("obtenerTramites");
 
-const Visorpdf = document.getElementById("Visorpdf");
-
-
+//? Funcion para buscar tramites por: ID_Tramite, Descripcion, Nombre, ID_Socio, Nombre de socio, ID_Cuenta.
 function buscar() {
   $.ajax({
     type: "POST",
@@ -21,6 +21,7 @@ function buscar() {
   });
 }
 
+//? Funcion para ver el pdf en el dialog.
 function verPdf(Idtramite){
   $.ajax({
     type: "POST",
@@ -43,7 +44,7 @@ function verPdf(Idtramite){
 
 }
 
-
+//? Funcion para cerrar el dialog
 function cerrarDialog(id) {
   document.getElementById(id).close();
 }

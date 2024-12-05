@@ -1,3 +1,4 @@
+//? Elementos del html
 const checkbox = document.getElementById("addCuenta");
 
 const inputSocio = document.getElementById("txtSocio");
@@ -19,6 +20,8 @@ const itemTipoTramite = document.getElementById("itemsTipoTramite");
 const messageError = document.getElementById("messageError");
 const messagePdf = document.getElementById("message-pdf");
 
+//?Cuando se termine de renderizar el html obtiene los socios, tipos de tramitrs activos y servicios, ademas de cambiarle
+//? los estilos a los componentes de cuenta, manzana y lote.
 $(document).ready(() => {
   obtenerSocios();
   obtenerTipoTramiteActivo();
@@ -38,7 +41,7 @@ $(document).ready(() => {
   }
 });
 
-//* Valida que el valor del input de socios exista en las opciones
+//? Valida que el valor del input de socios exista en las opciones
 inputSocio.addEventListener("change", () => {
   if (isInputValido(inputSocio, itemsSocio)) {
     inputCuenta.value = "";
@@ -53,7 +56,7 @@ inputSocio.addEventListener("change", () => {
   }
 });
 
-//* Valida que el valor del input de cuenta exista en las opciones
+//? Valida que el valor del input de cuenta exista en las opciones
 inputCuenta.addEventListener("change", () => {
   if (isInputValido(inputCuenta, itemsCuenta)) {
     messageError.style.display = "none";
@@ -65,7 +68,7 @@ inputCuenta.addEventListener("change", () => {
   }
 });
 
-//* Valida que el valor del input de servicios exista en las opciones
+//? Valida que el valor del input de servicios exista en las opciones
 inputServicio.addEventListener("change", () => {
   if (isInputValido(inputServicio, itemServicio)) {
     messageError.style.display = "none";
@@ -77,7 +80,7 @@ inputServicio.addEventListener("change", () => {
   }
 });
 
-//* Valida que el valor del input de servicios exista en las opciones
+//? Valida que el valor del input de servicios exista en las opciones
 inputTipoTramite.addEventListener("change", () => {
   if (isInputValido(inputTipoTramite, itemTipoTramite)) {
     messageError.style.display = "none";
@@ -89,13 +92,13 @@ inputTipoTramite.addEventListener("change", () => {
   }
 });
 
-//* Funcion para validar que el valor del input exista en las opciones
+//? Funcion para validar que el valor del input exista en las opciones
 function isInputValido(inputElement, datalistElement) {
   const options = Array.from(datalistElement.options);
   return options.some((option) => option.value === inputElement.value.trim());
 }
 
-//* Valida que no existan caracteres raros en los inputs (y textarea) tipados por el usuario
+//? Valida que no existan caracteres raros en los inputs (y textarea) tipados por el usuario
 function validarCaracteres(inputElement) {
   //? asegura que solo se permiten letras, números, letras con acento y espacios en el valor del input.
   const regex = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚüÜñÑ]*$/;
@@ -107,6 +110,7 @@ function validarCaracteres(inputElement) {
   }
 }
 
+//? Funcion para obtener socios
 function obtenerSocios() {
   $.ajax({
     type: "POST",
@@ -123,6 +127,7 @@ function obtenerSocios() {
   });
 }
 
+//? Funcion para obtener tipos de tramites activos
 function obtenerTipoTramiteActivo() {
   $.ajax({
     type: "POST",
@@ -139,6 +144,7 @@ function obtenerTipoTramiteActivo() {
   });
 }
 
+//? Funcion para obtener servicios
 function obtenerServicios() {
   $.ajax({
     type: "POST",
@@ -155,6 +161,7 @@ function obtenerServicios() {
   });
 }
 
+//? Funcion para obtener las cuentas de un socio.
 function obtenerCuentasSocio(socioId) {
   $.ajax({
     type: "POST",
@@ -172,6 +179,7 @@ function obtenerCuentasSocio(socioId) {
   });
 }
 
+//? Funcion para subir los pdf.
 document.getElementById("uploadBtn").addEventListener("click", function () {
   //? Validaciones de caracteres
   const validDescripcion = validarCaracteres(textareaDescripcion);
@@ -223,6 +231,7 @@ document.getElementById("uploadBtn").addEventListener("click", function () {
     return;
   }
 
+  //? Se crea el formData
   const formData = new FormData();
   for (let i = 0; i < files.length; i++) {
     if (files[i].type !== "application/pdf") {
@@ -244,11 +253,12 @@ document.getElementById("uploadBtn").addEventListener("click", function () {
   formData.append("manzana", txtmanzana.value);
   formData.append("lote", txtlote.value);
 
-  console.log("Datos en FormData:");
-  for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-  }
+  // console.log("Datos en FormData:");
+  // for (const [key, value] of formData.entries()) {
+  //     console.log(`${key}: ${value}`);
+  // }
   
+  //? Mandamos el req con el formData
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "./php/subirPdf.php", true);
   xhr.onload = () => {

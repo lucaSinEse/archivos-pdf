@@ -1,6 +1,6 @@
 console.log("HOLA");
 
-//elementos de agregar tipo tramite
+//? elementos de agregar tipo tramite
 const txtdescripcionTramiteCreado = document.getElementById(
   "txtdescripcionTramiteCreado"
 );
@@ -12,13 +12,13 @@ const lblnotificacionagregado = document.getElementById(
 );
 
 
-//tabla de tipo tramites
+//? tabla de tipo tramites
 const obtenerTipoTramites = document.getElementById(
   "obtenerTipoTramites"
 );
 
 
-// elementos formulario editar
+//? elementos formulario editar
 const lblIdTipotramite = document.getElementById(
   "lblIdTipotramite"
 );
@@ -34,21 +34,24 @@ const lblnotificacioneditado = document.getElementById(
 
 
 $(document).ready(function() {
-  //trae todos los elemnetos para l
+  //? trae todos los tipos de tramites cuando carga todo el html.
   ObtenerTipoTramites();
 
 });
 
 
+//? Funcion para abrir el dialog
 function abrirDialog(id) {
   const dialog = document.getElementById(id);
   dialog.showModal();
 }
 
+//? Funcion para cerrar el dialog
 function cerrarDialog(id) {
   document.getElementById(id).close();
 }
 
+//? Funcion para abrir el dialog para editar un tipo de tramite
 function abrirDialogEditar(idDialog, id_TipoTramite,estado, descripcion) {
   const dialog = document.getElementById(idDialog);
   dialog.showModal();
@@ -62,7 +65,7 @@ function abrirDialogEditar(idDialog, id_TipoTramite,estado, descripcion) {
   }
 }
 
-
+//? Funcion para agregar un tipo de tramite
 function AgregarTipoTramite() {
   if(txtdescripcionTramiteCreado.value ==""){
     lblnotificacionagregado.innerText = "complete el campo descripcion";
@@ -95,6 +98,7 @@ function AgregarTipoTramite() {
   }
 }
 
+//? FUncion para obtener los tipos de tramites y mostrarlos en el html
 function ObtenerTipoTramites() {
   $.ajax({
     type: "POST",
@@ -112,6 +116,7 @@ function ObtenerTipoTramites() {
   });
 }
 
+//? Funcion que edita el tipo de tramite mediante su id.
 function editarTramite(){
   if(descripcionTramiteEditado.value =="") {
     lblnotificacioneditado.innerText = "Complete el campo descripcion";
@@ -150,9 +155,9 @@ function editarTramite(){
 }
 
 function validarString(s) {
-  // Definir los caracteres no permitidos
+  //? Definir los caracteres no permitidos
   const caracteresNoPermitidos = /['"!]/;
 
-  // Verificar si el string contiene algún caracter no permitido
+  //? Verificar si el string contiene algún caracter no permitido
   return !caracteresNoPermitidos.test(s);
 }
