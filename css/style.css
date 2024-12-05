@@ -384,6 +384,23 @@ footer {
   height: 40%;
 }
 
+#Visorpdf {
+  border: none;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  width: 50%;
+  height: 73vh;
+}
+
+.dialog-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
 @media (max-width: 1050px) {
   header {
     display: flex;
