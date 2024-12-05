@@ -178,11 +178,15 @@
     $sql = "SELECT * FROM `Archivos_Pdfs` WHERE `ID_Tramite` = $idtramite";
     $result = mysqli_query($conexion, $sql);
     $cadena = "";
+    if($result) {
+      while($row = mysqli_fetch_array($result) ) {
+        $cadena = $cadena . $row['Path']."///";
+      }
+      echo $cadena;
 
-    while($row = mysqli_fetch_array($result) ) {
-      $cadena = $cadena . $row['Path']."///";
+    } else {
+      echo json_encode(["error" => "Error en la consulta: " . mysqli_error($conexion)]);
     }
-    echo $cadena;
     desconectar($conexion); 
   }
 ?>

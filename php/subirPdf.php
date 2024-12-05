@@ -97,6 +97,7 @@
                   $contador++;
                   $nombreArchivo = $descripcionTipoTramite . "_" . $contador . ".pdf";
                   $pathArchivo = $pathArchivoBase . "/" . $nombreArchivo;
+                  $pathAjustado = ajustarPath($pathArchivo);
                   
                   if (move_uploaded_file($_FILES['pdf']['tmp_name'][$key], $pathArchivo)) {
                     echo "Por mover lospdf a la carpeta. ". $pathArchivo. " ";
@@ -105,7 +106,7 @@
                     $conexion = conectar();
                     $sql = "INSERT INTO `Archivos_Pdfs` 
                             (`ID_Tramite`, `ID_Usuario`, `Nombre`, `Path`, `Fecha`, `Hora`)
-                            VALUES ('$idTramite', '1', '$nombreArchivo', '$pathArchivo', '$fecha', '$hora')";
+                            VALUES ('$idTramite', '1', '$nombreArchivo', '$pathAjustado', '$fecha', '$hora')";
                     $result = mysqli_query($conexion, $sql);
                     desconectar($conexion);
 
@@ -176,6 +177,7 @@
               $contador++;
               $nombreArchivo = $descripcionTipoTramite . "_" . $contador . ".pdf";
               $pathArchivo = $pathArchivoBase . "/" . $nombreArchivo;
+              $pathAjustado = ajustarPath($pathArchivo);
               
               if(move_uploaded_file($_FILES['pdf']['tmp_name'][$key], $pathArchivo)) {
                 echo "Archivo guardado en: " . $pathArchivo . " ";
@@ -185,7 +187,7 @@
 
                 $sql = "INSERT INTO `Archivos_Pdfs` 
                         (`ID_Tramite`, `ID_Usuario`, `Nombre`, `Path`, `Fecha`, `Hora`)
-                        VALUES ('$idTramite', '1', '$nombreArchivo', '$pathArchivo', '$fecha', '$hora')";
+                        VALUES ('$idTramite', '1', '$nombreArchivo', '$pathAjustado', '$fecha', '$hora')";
                 $result = mysqli_query($conexion, $sql);
                 desconectar($conexion);
 
@@ -287,6 +289,7 @@
                   $contador++;
                   $nombreArchivo = $descripcionTipoTramite . "_" . $contador . ".pdf";
                   $pathArchivo = $pathArchivoBase . "/" . $nombreArchivo;
+                  $pathAjustado = ajustarPath($pathArchivo);
 
                   if(move_uploaded_file($_FILES['pdf']['tmp_name'][$key], $pathArchivo)){
                     echo "Por mover lospdf a la carpeta. ". $pathArchivo. " ";
@@ -295,7 +298,7 @@
                     $conexion = conectar();
                     $sql = "INSERT INTO `Archivos_Pdfs` 
                             (`ID_Tramite`, `ID_Usuario`, `Nombre`, `Path`, `Fecha`, `Hora`)
-                            VALUES ('$idTramite', '1', '$nombreArchivo', '$pathArchivo', '$fecha', '$hora')";
+                            VALUES ('$idTramite', '1', '$nombreArchivo', '$pathAjustado', '$fecha', '$hora')";
                     $result = mysqli_query($conexion, $sql);
                     desconectar($conexion);
 
@@ -368,6 +371,7 @@
               $contador++;
               $nombreArchivo = $descripcionTipoTramite . "_" . $contador . ".pdf";
               $pathArchivo = $pathArchivoBase . "/" . $nombreArchivo;
+              $pathAjustado = ajustarPath($pathArchivo);
 
               if(move_uploaded_file($_FILES['pdf']['tmp_name'][$key], $pathArchivo)){
                 echo "Archivo guardado en: " . $pathArchivo . " ";
@@ -377,7 +381,7 @@
 
                 $sql = "INSERT INTO `Archivos_Pdfs` 
                         (`ID_Tramite`, `ID_Usuario`, `Nombre`, `Path`, `Fecha`, `Hora`)
-                        VALUES ('$idTramite', '1', '$nombreArchivo', '$pathArchivo', '$fecha', '$hora')";
+                        VALUES ('$idTramite', '1', '$nombreArchivo', '$pathAjustado', '$fecha', '$hora')";
                 $result = mysqli_query($conexion, $sql);
                 desconectar($conexion);
 
@@ -406,4 +410,8 @@
       }
     }
   } 
+
+  function ajustarPath($path) {
+    return substr($path, 3);
+}
 ?>
