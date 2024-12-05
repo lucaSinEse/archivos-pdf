@@ -180,8 +180,10 @@
     $cadena = "";
     if($result) {
       while($row = mysqli_fetch_array($result) ) {
-        $cadena = $cadena . $row['Path']."///";
+        // $cadena = $cadena . $row['Path']."///";
+        $cadena = $cadena . "<iframe src='". $row['Path']."'></iframe>";
       }
+      $cadena = $cadena . "<button class='eliminar' onclick=\"cerrarDialog('Visorpdf')\">Cerrar</button>";
       echo $cadena;
 
     } else {

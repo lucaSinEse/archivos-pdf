@@ -30,9 +30,10 @@ function verPdf(Idtramite){
       idtramite: Idtramite,
     },
     success: (data) => {
-      console.log(data);
-      /* Visorpdf.innerHTML ="<iframe src='./Archivos/182982/112183/Capital energia_1.pdf' width='100%' height='600px'></iframe>"; */
+      // console.log(data);
       const dialog = document.getElementById("Visorpdf");
+      const dialogContainer = document.getElementById("dialogContainer");
+      dialogContainer.innerHTML = data;
       dialog.showModal();
     },
     error: function (xhr, status, error) {
