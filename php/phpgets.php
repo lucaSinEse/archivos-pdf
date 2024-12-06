@@ -147,7 +147,17 @@
     if ($result) {
       $cadena = "";
       while ($row = mysqli_fetch_array($result)) {
-          $cadena = $cadena . "<tr class='tipos'>
+        if (empty($row['ID_Cuenta'])) {
+          $datosCuenta = "<td>No hay datos</td>";
+        } else {
+          $datosCuenta = "<td>
+                            " . (!empty($row['ID_Cuenta']) ? "Cuenta: " . $row['ID_Cuenta'] . "<br>" : "") . 
+                            (!empty($row['NumeroManzana']) ? "Manzana: " . $row['NumeroManzana'] . "<br>" : "") . 
+                            (!empty($row['NumeroLote']) ? "Lote: " . $row['NumeroLote'] . "<br>" : "") . 
+                          "</td>";
+        }  
+        
+        $cadena = $cadena . "<tr class='tipos'>
                                 <td>". $row['ID_Tramite'] ."</td>
                                 <td>". $row['DesTipoTramite'] ."</td>
                                 <td>". $row['Servicio'] ."</td>
@@ -156,11 +166,7 @@
                                   ". $row['ID_Socio'] ."<br>
                                   ". $row['Nombre'] ."<br>
                                 </td>
-                                <td>
-                                Cuenta: ". $row['ID_Cuenta'] ."<br>
-                                Manzana: ". $row['NumeroManzana'] ."<br>
-                                  Lote: ". $row['NumeroLote'] ."<br>
-                                </td>
+                                ". $datosCuenta . "
                                 <td><a href='#' onclick='verPdf(". $row['ID_Tramite'] .")'>Ver PDF</a></td>
                               </tr>";
       }

@@ -18,6 +18,8 @@ const inputTipoTramite = document.getElementById("txtTipoTramite");
 const itemTipoTramite = document.getElementById("itemsTipoTramite");
 
 const messageError = document.getElementById("messageError");
+
+const fileInput = document.getElementById("pdfFile");
 const messagePdf = document.getElementById("message-pdf");
 
 //?Cuando se termine de renderizar el html obtiene los socios, tipos de tramitrs activos y servicios, ademas de cambiarle
@@ -179,6 +181,19 @@ function obtenerCuentasSocio(socioId) {
   });
 }
 
+//? Evento para mostrar el nombre del pdf
+fileInput.addEventListener("change", () => {
+  const files = fileInput.files;
+
+  if (files.length === 0) {
+    messagePdf.textContent = "No se seleccionó ningún archivo.";
+  } else if (files.length === 1) {
+    messagePdf.textContent = `Archivo seleccionado: ${files[0].name}`;
+  } else {
+    messagePdf.textContent = `Se seleccionaron múltiples archivos (${files.length}).`;
+  }
+});
+
 //? Funcion para subir los pdf.
 document.getElementById("uploadBtn").addEventListener("click", function () {
   //? Validaciones de caracteres
@@ -215,7 +230,6 @@ document.getElementById("uploadBtn").addEventListener("click", function () {
   }
 
   //? Aca seguiria todo lo relacionado con la subida del pdf.
-  const fileInput = document.getElementById("pdfFile");
   const files = fileInput.files;
   let path = ``;
   if(!checkbox.checked) {
@@ -266,6 +280,21 @@ document.getElementById("uploadBtn").addEventListener("click", function () {
       messageError.style.display = "flex";
       messageError.textContent = "Archivo subido correctamente";
       messageError.classList.add("error-visible");
+
+      inputSocio.value = "";
+      txtDescripcion.value = "";
+      inputTipoTramite.value = "";
+      inputServicio.value = "";
+      checkbox.checked = false;
+      inputCuenta.value = "";
+      txtmanzana.value = "";
+      txtlote.value = "";
+
+      const inputContainers = document.querySelectorAll(".inputContainer");
+        inputContainers.forEach((container) => {
+        container.style.display = "none";
+      });
+
     } else {
       messageError.style.display = "flex";
       messageError.textContent = "Error al subir el archivo.";

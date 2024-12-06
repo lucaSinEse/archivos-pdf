@@ -118,6 +118,7 @@ function ObtenerTipoTramites() {
 
 //? Funcion que edita el tipo de tramite mediante su id.
 function editarTramite(){
+  lblnotificacioneditado.innerText = " ";
   if(descripcionTramiteEditado.value =="") {
     lblnotificacioneditado.innerText = "Complete el campo descripcion";
   }else{

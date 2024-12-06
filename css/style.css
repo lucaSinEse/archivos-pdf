@@ -415,6 +415,13 @@ iframe {
   header {
     display: flex;
     justify-content: flex-start;
+    min-height: 10dvh;
+  }
+
+  main {
+    display: flex;
+    min-height: 60dvh;
+    /* height: auto; */
   }
 
   .button-container {
@@ -517,7 +524,6 @@ iframe {
   .subirArchivosContainer h2 {
     font-size: 20px; 
     margin-bottom: 10px; 
-    overflow: scroll;
     height: auto; 
   }
 
