@@ -91,8 +91,14 @@
                 }
                 echo "Por entrar al foreach ";
 
+                // Filtrar los archivos existentes que coincidan con el prefijo
                 $archivosExistentes = array_diff(scandir($pathArchivoBase), ['.', '..']);
-                $contador = count($archivosExistentes); 
+                $contador = 0; // Inicializar el contador para este tipo específico
+                foreach ($archivosExistentes as $archivo) {
+                    if (strpos($archivo, $descripcionTipoTramite . "_") === 0) {
+                        $contador++;
+                    }
+                }
                 foreach ($_FILES['pdf']['name'] as $key => $originalNombreArchivo) {
                   $contador++;
                   $nombreArchivo = $descripcionTipoTramite . "_" . $contador . ".pdf";
@@ -171,8 +177,14 @@
 
             echo "Por entrar al foreach ";
 
+            // Filtrar los archivos existentes que coincidan con el prefijo
             $archivosExistentes = array_diff(scandir($pathArchivoBase), ['.', '..']);
-            $contador = count($archivosExistentes); 
+            $contador = 0; // Inicializar el contador para este tipo específico
+            foreach ($archivosExistentes as $archivo) {
+                if (strpos($archivo, $descripcionTipoTramite . "_") === 0) {
+                    $contador++;
+                }
+            } 
             foreach ($_FILES['pdf']['name'] as $key => $originalNombreArchivo) {
               $contador++;
               $nombreArchivo = $descripcionTipoTramite . "_" . $contador . ".pdf";
@@ -283,8 +295,14 @@
                 }
                 echo "Por entrar al foreach ";
 
+                // Filtrar los archivos existentes que coincidan con el prefijo
                 $archivosExistentes = array_diff(scandir($pathArchivoBase), ['.', '..']);
-                $contador = count($archivosExistentes);
+                $contador = 0; // Inicializar el contador para este tipo específico
+                foreach ($archivosExistentes as $archivo) {
+                    if (strpos($archivo, $descripcionTipoTramite . "_") === 0) {
+                        $contador++;
+                    }
+                }
                 foreach($_FILES['pdf']['name'] as $key => $originalNombreArchivo) {
                   $contador++;
                   $nombreArchivo = $descripcionTipoTramite . "_" . $contador . ".pdf";
@@ -365,8 +383,14 @@
 
             echo "Por entrar al foreach ";
 
+            // Filtrar los archivos existentes que coincidan con el prefijo
             $archivosExistentes = array_diff(scandir($pathArchivoBase), ['.', '..']);
-            $contador = count($archivosExistentes);
+            $contador = 0; // Inicializar el contador para este tipo específico
+            foreach ($archivosExistentes as $archivo) {
+                if (strpos($archivo, $descripcionTipoTramite . "_") === 0) {
+                    $contador++;
+                }
+            }
             foreach($_FILES['pdf']['name'] as $key => $originalNombreArchivo) {
               $contador++;
               $nombreArchivo = $descripcionTipoTramite . "_" . $contador . ".pdf";

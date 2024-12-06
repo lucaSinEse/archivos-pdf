@@ -289,6 +289,8 @@ document.getElementById("uploadBtn").addEventListener("click", function () {
       inputCuenta.value = "";
       txtmanzana.value = "";
       txtlote.value = "";
+      fileInput.value = "";
+      messagePdf.textContent = "";
 
       const inputContainers = document.querySelectorAll(".inputContainer");
         inputContainers.forEach((container) => {
